@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.css'; // Importe o arquivo CSS do Tailwind
+
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import Login from './components/Login';
+import Home from './components/Home';
+import SignUp from './components/Signup';
+import { auth } from './firebase/firebase';
+
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes> 
+        <Route exact path='/login' element={<Login />}/>
+        <Route exact path="/signup" element={<SignUp />} /> 
+        <Route exact path='/home' element={<Home/>} />
+        <Route path="/" element={user ? <Home user={user} /> : <Login />} /> 
+
+      </Routes>
     </div>
   );
 }
