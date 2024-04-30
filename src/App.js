@@ -1,7 +1,7 @@
 import './index.css'; // Importe o arquivo CSS do Tailwind
 
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Login from './components/Login';
 import Home from './components/Home';

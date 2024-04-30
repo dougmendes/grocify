@@ -1,6 +1,7 @@
 import React from 'react';
 import { auth } from '../firebase/firebase'; 
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Home = ({ user }) => {
   const navigate = useNavigate();
@@ -23,6 +24,13 @@ const Home = ({ user }) => {
       </div>
     </div>
   );
+};
+
+
+Home.propTypes = { 
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired
+  })
 };
 
 export default Home;
