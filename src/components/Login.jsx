@@ -1,22 +1,36 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase/firebase';
+import { auth, signInWithPopup, GoogleAuthProvider } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FaGoogle } from 'react-icons/fa';
+
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLoginEmailAndPassword = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await auth.signInWithEmailAndPassword(auth, email, password);
       console.log('Login successful!');
       navigate('/home')
     } catch (error) {
       console.error('Error logging in:', error);
     }
   };
+  
+  const handleGoogleLogin = async () => {
+    try{
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      console.log('Login successful!');
+      navigate('/home')
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  };
+
 
   const handleSignUpRedirect = () => {
     navigate('/signup')
@@ -42,9 +56,16 @@ const Login = () => {
         />
         <button
           className="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-          onClick={handleLogin}
+          onClick={handleLoginEmailAndPassword}
         >
           Login
+        </button>
+        <button
+          className="w-full px-4 py-2 mt-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+          onClick={handleGoogleLogin}
+        >
+          <FaGoogle className="inline-block mr-2" />
+          Login with Google
         </button>
         <button
           className="w-full px-4 py-2 text-black rounded-md hover:text-green-600"
