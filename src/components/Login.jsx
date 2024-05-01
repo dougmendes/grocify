@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { auth, signInWithPopup, GoogleAuthProvider } from '../firebase/firebase';
+import { auth, signInWithPopup,signInWithEmailAndPassword, GoogleAuthProvider } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 
@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleLoginEmailAndPassword = async () => {
     try {
-      await auth.signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       console.log('Login successful!');
       navigate('/home')
     } catch (error) {
