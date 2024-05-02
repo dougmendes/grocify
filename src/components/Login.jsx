@@ -20,16 +20,10 @@ const Login = () => {
       navigate('/home');
     } catch (error) {
       console.error('Error logging in:', error);
-      if (error.code === 'auth/user-not-found'){
-        setError('User not registered. Please sign up.');
-      }else if( error.code === 'auth/wrong-password' || error.code === 'auth/invalid-email' || error.code === 'auth/invalid-credential'){
-        setError('Error logging in. Please check your email and password.');
-      }else if ( error.code === 'auth/too-many-requests'){
-        setError('This user has been temporarily disabled due to too many failed login attempts. Please try again later or reset your password.');
-      }
+      setError('Error logging in. Please check your email and password.');
     }
   };
-  
+
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -44,42 +38,52 @@ const Login = () => {
 
   const handleSignUpRedirect = () => {
     navigate('/signup');
-  }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-500 to-black">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-black">
       <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-4 text-center text-green-500">Grocify</h2>
-        <input
-          className="w-full px-3 py-2 mb-4 border border-gray-300 rounded-md"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          className="w-full px-3 py-2 mb-4 border border-gray-300 rounded-md"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Grocify</h2>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="input input-bordered w-full bg-gray-200"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            className="input input-bordered w-full bg-gray-200"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        {error && <p className="text-red-500 py-2">{error}</p>}
         <button
-          className="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          className="btn btn-primary btn-block mt-4"
           onClick={handleLoginEmailAndPassword}
         >
           Login
         </button>
         <button
-          className="w-full px-4 py-2 mt-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+          className="btn btn-error btn-block mt-4"
           onClick={handleGoogleLogin}
         >
-          <FaGoogle className="inline-block mr-2" />
+          <FaGoogle className="mr-2" />
           Login with Google
         </button>
         <button
-          className="w-full px-4 py-2 text-black rounded-md hover:text-green-600"
+          className="btn btn-link btn-block mt-4 text-blue-800 hover:text-blue-900"
           onClick={handleSignUpRedirect}
         >
           Sign Up
