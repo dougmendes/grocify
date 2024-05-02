@@ -1,3 +1,5 @@
+
+//Login.jsx
 import React, { useState } from 'react';
 import { auth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
@@ -41,7 +43,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-black">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-500 to-black">
       <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Grocify</h2>
         <div className="form-control">
@@ -51,7 +53,7 @@ const Login = () => {
           <input
             type="email"
             placeholder="Enter your email"
-            className="input input-bordered w-full bg-gray-200"
+            className="input input-bordered w-full bg-gray-200 mb-2"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -63,7 +65,7 @@ const Login = () => {
           <input
             type="password"
             placeholder="Enter your password"
-            className="input input-bordered w-full bg-gray-200"
+            className="input input-bordered w-full bg-gray-200 mb-2"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -76,14 +78,14 @@ const Login = () => {
           Login
         </button>
         <button
-          className="btn btn-error btn-block mt-4"
+          className="btn btn-error btn-block mt-2"
           onClick={handleGoogleLogin}
         >
           <FaGoogle className="mr-2" />
           Login with Google
         </button>
         <button
-          className="btn btn-link btn-block mt-4 text-blue-800 hover:text-blue-900"
+          className="btn btn-link btn-block mt-2 text-blue-800 hover:text-blue-900"
           onClick={handleSignUpRedirect}
         >
           Sign Up

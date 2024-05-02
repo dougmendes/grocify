@@ -1,8 +1,8 @@
+//Signup.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { FaGoogle } from 'react-icons/fa';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-black">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-500 to-black">
       <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Sign Up</h2>
         <div className="form-control">
@@ -36,7 +36,7 @@ const SignUp = () => {
           <input
             type="email"
             placeholder="Enter your email"
-            className="input input-bordered w-full bg-gray-200"
+            className="input input-bordered w-full bg-gray-200 mb-2"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -48,7 +48,7 @@ const SignUp = () => {
           <input
             type="password"
             placeholder="Password"
-            className="input input-bordered w-full bg-gray-200"
+            className="input input-bordered w-full bg-gray-200 mb-2"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -60,7 +60,7 @@ const SignUp = () => {
           <input
             type="password"
             placeholder="Confirm Password"
-            className="input input-bordered w-full bg-gray-200"
+            className="input input-bordered w-full bg-gray-200 mb-2"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
