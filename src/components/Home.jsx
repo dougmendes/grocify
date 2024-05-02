@@ -22,7 +22,7 @@ const Home = () => {
           <a className="btn btn-ghost normal-case text-xl">Grocify</a>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
-            <label className="btn btn-ghost btn-circle avatar">
+            <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <FaUserCircle size="100%" />
               </div>
@@ -33,10 +33,13 @@ const Home = () => {
               <li><a onClick={handleLogout}><FaSignOutAlt className="mr-2"/>Sign out</a></li>
             </ul>
           </div>
-          <div className="text-white mx-2 mt-2">
+          <div className="text-white mx-2">
             {currentUser ? currentUser.displayName || currentUser.email: 'No user logged in'}
           </div>
         </div>
+      </div>
+      <div className="flex items-center justify-center p-8">
+ 
       </div>
     </div>
   );
