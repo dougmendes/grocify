@@ -1,35 +1,56 @@
 import React from 'react';
-import { auth } from '../firebase/firebase'; 
+import { auth } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
+import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import { useAuth } from '../context/AuthContext';
 
 const Home = ({ user }) => {
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+
   const handleLogout = () => {
-    auth.signOut(); 
-    navigate("/login")
+    auth.signOut();
+    navigate("/login");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-500 to-black">
-      <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-4 text-center text-green-500">Bem-vindo!</h2>
-        {user && <p className="text-center">Email: {user.email}</p>}
-        <button
-          className="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 mt-4"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-black">
+      <div className="navbar bg-base-100">
+        <div className="flex-1">
+          <a className="btn btn-ghost normal-case text-xl">Grocify</a>
+        </div>
+        <div className="flex-none">
+          <div className="dropdown dropdown-end">
+            <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <FaUserCircle size="100%" />
+              </div>
+            </label>
+            <ul tabIndex="0" className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+              <li><a className="justify-between">
+                Profile
+              </a></li>
+              <li><a>Settings</a></li>
+              <li><a onClick={handleLogout}><FaSignOutAlt className="mr-2"/>Sign out</a></li>
+            </ul>
+          </div>
+          <div className="text-white mx-2">
+            {currentUser ? currentUser.displayName || currentUser.email: 'No user logged in'}
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center justify-center p-8">
+ 
       </div>
     </div>
   );
 };
 
-
 Home.propTypes = { 
   user: PropTypes.shape({
-    email: PropTypes.string.isRequired
+    displayName: PropTypes.string,
+    email: PropTypes.string.isRequired 
   })
 };
 
