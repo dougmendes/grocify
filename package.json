@@ -42,9 +42,10 @@
     ]
   },
   "devDependencies": {
-    "@svgr/webpack": "^6.2.1"
+    "@svgr/webpack": "^6.2.1",
+    "cypress": "^13.8.1"
   },
   "overrides": {
-    "@svgr/webpack":"^6.2.1"
+    "@svgr/webpack": "^6.2.1"
   }
 }
