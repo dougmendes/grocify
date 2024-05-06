@@ -67,6 +67,7 @@ const Home = () => {
     setCurrentListIndex(null);
     setModalMode('add');
   };
+
   const toggleViewItemModal = (list) => {
     setViewListItems([...list.items]);
     setCurrentList(list);
@@ -95,31 +96,33 @@ const Home = () => {
         </div>
       </div>
       <div className="flex items-center justify-center p-8">
-        <table className="table-auto w-3/4 bg-white rounded-lg shadow-lg">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="px-4 py-3">List Name</th>
-              <th className="px-4 py-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {shoppingLists.map((list, index) => (
-              <tr key={index} className="border-b">
-                <td className="px-4 py-2 cursor-pointer" onClick={() => toggleViewItemModal(list)}>
-                  {list.name}
-                </td>
-                <td className="px-4 py-2 flex justify-around">
-                  <button className="btn btn-xs btn-warning" onClick={() => handleEdit(index)}>
-                    <FaPencilAlt />
-                  </button>
-                  <button className="btn btn-xs btn-error" onClick={() => handleDelete(index)}>
-                    <FaTrash />
-                  </button>
-                </td>
+        <div className="w-full max-w-3xl overflow-hidden rounded-lg shadow-lg">
+          <table className="w-full text-sm">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                <th scope="col" className="px-6 py-3">List Name</th>
+                <th scope="col" className="px-6 py-3">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {shoppingLists.map((list, index) => (
+                <tr key={index} className="bg-white border-b">
+                  <td className="px-6 py-4 cursor-pointer" onClick={() => toggleViewItemModal(list)}>
+                    {list.name}
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <button className="btn btn-xs btn-warning" onClick={() => handleEdit(index)}>
+                      <FaPencilAlt />
+                    </button>
+                    <button className="btn btn-xs btn-error" onClick={() => handleDelete(index)}>
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <button className="btn btn-circle btn-primary fixed bottom-4 right-4" onClick={() => { setModalMode('add'); setShowModal(true); }}>
         <FaPlus />
@@ -127,7 +130,7 @@ const Home = () => {
 
       {showModal && (
         <div className="modal modal-open">
-          <div className="modal-box w-1/2">
+          <div className="modal-box w-11/12 md:w-1/2">
             <h3 className="font-bold text-lg">{modalMode === 'add' ? 'Create New Shopping List' : 'Edit Shopping List'}</h3>
             <input
               type="text"
@@ -171,7 +174,7 @@ const Home = () => {
 
       {viewListItems && (
         <div className="modal modal-open">
-          <div className="modal-box">
+          <div className="modal-box w-11/12 md:w-1/2">
             <h3 className="font-bold text-lg">{currentList ? currentList.name : 'List Details'}</h3>
             <ul>
               {viewListItems.map((item, index) => (
