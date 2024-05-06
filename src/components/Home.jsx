@@ -132,38 +132,50 @@ const Home = () => {
         <div className="modal modal-open">
           <div className="modal-box w-11/12 md:w-1/2">
             <h3 className="font-bold text-lg">{modalMode === 'add' ? 'Create New Shopping List' : 'Edit Shopping List'}</h3>
-            <input
-              type="text"
-              placeholder="List name"
-              className="input input-bordered w-full max-w-xs my-2"
-              value={newListName}
-              onChange={(e) => setNewListName(e.target.value)}
-            />
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">List name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="List name"
+                className="input input-bordered w-full"
+                value={newListName}
+                onChange={(e) => setNewListName(e.target.value)}
+              />
+            </div>
             {newListItems.map((item, index) => (
-              <div key={index} className="flex gap-2 my-2">
-                <input
-                  type="text"
-                  placeholder="Item name"
-                  className="input input-bordered flex-grow"
-                  value={item.name}
-                  onChange={(e) => updateItem(index, 'name', e.target.value)}
-                />
-                <input
-                  type="number"
-                  placeholder="Quantity"
-                  className="input input-bordered"
-                  value={item.quantity}
-                  onChange={(e) => updateItem(index, 'quantity', e.target.value)}
-                />
-                <button className="btn btn-error btn-xs" onClick={() => {
-                  const updatedItems = newListItems.filter((_, i) => i !== index);
-                  setNewListItems(updatedItems);
-                }}>
-                  <FaTrash />
-                </button>
+              <div key={index} className="form-control">
+                <label className="label">
+                  <span className="label-text">Item name</span>
+                </label>
+                <div className="flex flex-wrap gap-2 items-end">
+                  <input
+                    type="text"
+                    placeholder="Item name"
+                    className="input input-bordered flex-grow"
+                    value={item.name}
+                    onChange={(e) => updateItem(index, 'name', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Quantity"
+                    className="input input-bordered w-24"
+                    value={item.quantity}
+                    onChange={(e) => updateItem(index, 'quantity', e.target.value)}
+                  />
+                  <button className="btn btn-error btn-xs" onClick={() => {
+                    const updatedItems = newListItems.filter((_, i) => i !== index);
+                    setNewListItems(updatedItems);
+                  }}>
+                    <FaTrash />
+                  </button>
+                </div>
               </div>
             ))}
-            <button className="btn btn-primary my-2" onClick={handleAddItem}>Add Item</button>
+            <div className="form-control mt-4">
+              <button className="btn btn-primary" onClick={handleAddItem}>Add Item</button>
+            </div>
             <div className="modal-action">
               <button className="btn" onClick={() => { setShowModal(false); resetModal(); }}>Cancel</button>
               <button className="btn btn-primary" onClick={handleAddList}>Save List</button>
