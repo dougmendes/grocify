@@ -5,7 +5,7 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.5.7",
     "@testing-library/user-event": "^13.5.0",
-    "daisyui": "^4.10.3",
+    "daisyui": "^4.10.5",
     "dotenv": "^16.4.5",
     "firebase": "^10.11.1",
     "firebase-admin": "^12.1.0",
